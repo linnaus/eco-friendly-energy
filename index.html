@@ -13,12 +13,35 @@
     section { padding: 20px; }
     footer { background: #2e7d32; color: white; text-align: center; padding: 10px; margin-top: 20px; }
     .card { background: #f1f8e9; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    #calculator {
+  background: #f9fbe7;
+  border: 1px solid #c5e1a5;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+#calculator input, #calculator select, #calculator button {
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
+}
+#calculator button {
+  background: #388e3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#calculator button:hover {
+  background: #2e7d32;
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Biogas Ghana</h1>
-    <p>Turning cow dung & kitchen waste into clean energy</p>
+    <h1>Eco-friendly energy solutions</h1>
+    <p>turning waste into clean energy</p>
   </header>
 
   <nav>
@@ -76,8 +99,45 @@
     <p>WhatsApp: +233-XXX-XXX-XXX</p>
   </section>
 
+  <section id="calculator">
+  <h2>Biogas Yield Calculator</h2>
+  <p>Estimate how much biogas you can produce based on cow dung (CD) and kitchen waste (KW) ratios. 
+     <br><small><em>Note: Values are based on small-scale research results; real outputs may vary.</em></small></p>
+
+  <label for="kgInput">Enter feedstock weight (kg): </label>
+  <input type="number" id="kgInput" placeholder="e.g. 10">
+
+  <label for="ratioSelect">Choose CD:KW ratio:</label>
+  <select id="ratioSelect">
+    <option value="23.25">1:1 (23.25 L/kg)</option>
+    <option value="19.66">2:1 (19.66 L/kg)</option>
+    <option value="31.31">1:2 (31.31 L/kg)</option>
+    <option value="34.09">1:3 (34.09 L/kg)</option>
+  </select>
+
+  <button onclick="calculateBiogas()">Calculate</button>
+
+  <div id="result" style="margin-top:15px; font-weight:bold;"></div>
+</section>
+
+<script>
+function calculateBiogas() {
+  let kg = document.getElementById("kgInput").value;
+  let yieldRate = document.getElementById("ratioSelect").value;
+  
+  if(kg <= 0) {
+    document.getElementById("result").innerHTML = "⚠️ Please enter a valid weight in kg.";
+    return;
+  }
+
+  let totalGas = (kg * yieldRate).toFixed(2);
+  document.getElementById("result").innerHTML = 
+    "✅ Estimated Gas Output: " + totalGas + " Litres";
+}
+</script>
+
   <footer>
-    <p>&copy; 2025 Biogas Ghana | Clean Energy for All</p>
+    <p>&copy; 2025 eco-friendly energy solutions | Clean Energy for All</p>
   </footer>
 </body>
 </html>
